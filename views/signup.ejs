@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Sign Up - QuickChat</title>
+  <style>
+    .avatar {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .avatar:hover {
+      transform: scale(1.1);
+    }
+    .selected {
+      border: 4px solid blue;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <!-- Sign-Up Container -->
+  <div class="signup-container w-full max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
+    
+    <!-- Header -->
+    <div class="signup-header mb-6">
+      <h2 class="text-2xl font-bold text-center text-blue-600">QuickChat Sign Up</h2>
+    </div>
+    
+    <!-- Sign-Up Form -->
+    <form>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+          Name
+        </label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+          Email
+        </label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+          Password
+        </label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">
+          Choose Avatar
+        </label>
+        <div class="flex justify-around">
+          <img src="/images/round-gradient-designify (1).png" alt="Avatar 1" class="avatar w-16 h-16 rounded-full" data-avatar="avatar1.png">
+          <img src="/images/round-gradient-designify (1).png" alt="Avatar 2" class="avatar w-16 h-16 rounded-full" data-avatar="avatar2.png">
+          <img src="/images/round-gradient-designify (1).png" alt="Avatar 3" class="avatar w-16 h-16 rounded-full" data-avatar="avatar3.png">
+          <img src="/images/round-gradient-designify (1).png" alt="Avatar 4" class="avatar w-16 h-16 rounded-full" data-avatar="avatar4.png">
+          <img src="/images/round-gradient-designify (1).png" alt="Avatar 5" class="avatar w-16 h-16 rounded-full" data-avatar="avatar5.png">
+          <img src="/images/round-gradient-designify (1).png" alt="Avatar 6" class="avatar w-16 h-16 rounded-full" data-avatar="avatar6.png">
+        </div>
+        <input type="hidden" id="selectedAvatar" name="avatar">
+      </div>
+      
+      <div class="flex items-center justify-between mb-4">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Sign Up
+        </button>
+        <a href="/login" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+          Already have an account?
+        </a>
+      </div>
+    </form>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.avatar').forEach(avatar => {
+      avatar.addEventListener('click', function() {
+        document.querySelectorAll('.avatar').forEach(av => av.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('selectedAvatar').value = this.dataset.avatar;
+      });
+    });
+  </script>
+  
+</body>
+</html>

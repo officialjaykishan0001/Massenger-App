@@ -1,24 +1,17 @@
-// const socket = io();
+function getCurrentTime() {
+  const now = new Date();
+  let hours = now.getHours();
+  const minutes = now.getMinutes();
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
-// const messages = document.getElementById("messages");
-// const form = document.getElementById("form");
-// const input = document.getElementById("input");
+  const meridian = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;  // Convert to 12-hour format and handle midnight (0 hours)
 
-// form.addEventListener("submit", (e )=>{
-//     e.preventDefault();
-//     if(input.value ){
-//         socket.emit("chat message", input.value)
-//         input.value = "";
-//     }
+  return `${hours}:${formattedMinutes} ${meridian}`;
+}
 
-// })
 
-// socket.on("chat message", (msg)=>{
-//     const item = document.createElement("li");
-//     item.textContent = msg;
-//     messages.appendChild(item);
-//     window.scrollTo(0, document.body.scrollHeight)
-// })
+
 
 const socket = io();
 
@@ -36,7 +29,7 @@ button.addEventListener("click", (e) => {
             <div class="message sent mb-4 flex items-end justify-end">
               <div class="message-content bg-blue-500 text-white p-3 rounded-lg">
                   <p class="text-sm">${input.value}</p>
-                     <span class="text-xs text-gray-200">10:32 AM</span>
+                     <span class="text-xs text-gray-200">${getCurrentTime()}</span>
                </div>
                <img src="/images/round-gradient-designify (1).png" alt="Avatar" class="rounded-full w-10 h-10 ml-3">
             </div>
@@ -45,19 +38,18 @@ button.addEventListener("click", (e) => {
 
     input.value = "";
   }
-
-
-
 })
 
 
-socket.on("chat message", (msg) => {
+socket.on("chat message details", (data) => {
+  const { msg, connected } = data;
+  
   chatMessagesCont.innerHTML += `
   <div class="message received mb-4 flex items-start">
   <img src="/images/round-gradient-designify (1).png" alt="Avatar" class="rounded-full w-10 h-10">
   <div class="message-content ml-3 bg-gray-200 p-3 rounded-lg">
     <p class="text-sm">${msg}</p>
-    <span class="text-xs text-gray-500">10:30 AM</span>
+    <span class="text-xs text-gray-500">${getCurrentTime()}</span>
   </div>
 </div>
     `
