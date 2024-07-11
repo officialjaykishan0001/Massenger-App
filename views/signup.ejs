@@ -23,13 +23,22 @@
   <!-- Sign-Up Container -->
   <div class="signup-container w-full max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
     
+    <!-- Flash Messages -->
+    <% if (error && error.length> 0) { %>
+      <div class="flash-message bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+        <span class="block sm:inline">
+          <%= error %>
+        </span>
+      </div>
+      <% } %>
+
     <!-- Header -->
     <div class="signup-header mb-6">
       <h2 class="text-2xl font-bold text-center text-blue-600">QuickChat Sign Up</h2>
     </div>
     
     <!-- Sign-Up Form -->
-    <form>
+    <form  action="/signup/user" method="post" enctype="multipart/form-data">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
           Name
@@ -55,15 +64,15 @@
         <label class="block text-gray-700 text-sm font-bold mb-2">
           Choose Avatar
         </label>
-        <div class="flex justify-around">
+        <!-- <div class="flex justify-around">
           <img src="/images/round-gradient-designify (1).png" alt="Avatar 1" class="avatar w-16 h-16 rounded-full" data-avatar="avatar1.png">
           <img src="/images/round-gradient-designify (1).png" alt="Avatar 2" class="avatar w-16 h-16 rounded-full" data-avatar="avatar2.png">
           <img src="/images/round-gradient-designify (1).png" alt="Avatar 3" class="avatar w-16 h-16 rounded-full" data-avatar="avatar3.png">
           <img src="/images/round-gradient-designify (1).png" alt="Avatar 4" class="avatar w-16 h-16 rounded-full" data-avatar="avatar4.png">
           <img src="/images/round-gradient-designify (1).png" alt="Avatar 5" class="avatar w-16 h-16 rounded-full" data-avatar="avatar5.png">
           <img src="/images/round-gradient-designify (1).png" alt="Avatar 6" class="avatar w-16 h-16 rounded-full" data-avatar="avatar6.png">
-        </div>
-        <input type="hidden" id="selectedAvatar" name="avatar">
+        </div> -->
+        <input type="file" id="selectedAvatar" name="avatar">
       </div>
       
       <div class="flex items-center justify-between mb-4">

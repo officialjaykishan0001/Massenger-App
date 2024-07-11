@@ -2,7 +2,9 @@ const express = require("express")
 const router = express.Router();
 
 router.get("/", function(req, res){
-    res.render("login");
+    let success = req.flash("success");
+    res.render("login", { success });
 })
+
 
 module.exports = router;
