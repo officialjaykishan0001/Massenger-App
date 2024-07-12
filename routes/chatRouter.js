@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const isAuthUser = require("../middlewares/userAuth");
 
 
-router.get("/", function(req, res){
+router.get("/", isAuthUser, function(req, res){
     res.render("chat");
 })
 

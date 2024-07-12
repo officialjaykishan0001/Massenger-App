@@ -20,6 +20,7 @@ app.use(session({
     secret: 'ABCD',
     resave: false,
     saveUninitialized: false,
+    cookie: { secure: false }
 }));
 
 app.use(flash());
