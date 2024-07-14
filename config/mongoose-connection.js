@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 
+
+
 mongoose.connect(process.env.MONGODB_STRING)
 .then(function(){
     console.log("connected");

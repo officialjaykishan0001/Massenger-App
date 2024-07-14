@@ -9,7 +9,12 @@ function getCurrentTime() {
 
   return `${hours}:${formattedMinutes} ${meridian}`;
 }
-
+var sessionData = { } ;
+document.addEventListener("DOMContentLoaded",async  function(){
+  let res  = await fetch("http://localhost:3000/session");
+  sessionData = await res.json();
+  console.log(sessionData.user)
+})
 
 
 
@@ -31,7 +36,7 @@ button.addEventListener("click", (e) => {
                   <p class="text-sm">${input.value}</p>
                      <span class="text-xs text-gray-200">${getCurrentTime()}</span>
                </div>
-               <img src="/images/round-gradient-designify (1).png" alt="Avatar" class="rounded-full w-10 h-10 ml-3">
+               <img src="data:${sessionData.user.avatarContentType};base64,${sessionData.user.avatar}" alt="Avatar" class="rounded-full w-10 h-10 ml-3">
             </div>
     `
     chatMessagesCont.scrollTop = chatMessagesCont.scrollHeight;

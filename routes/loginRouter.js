@@ -13,14 +13,18 @@ router.post("/user", upload.none(), async function(req, res){
     try{
         const {username, password}= req.body;
 
-        const user = await User.findOne({name: username, password: password});
+        const user = await User.findOne({name: username, password: password}, {avatar: 1, avatarContentType: 1});
         
         if(!user){
             req.flash('error', 'Username or Password is incorrect')
             return res.redirect("/login");
         }
 
-        req.session.user = { username: username };
+        req.session.user = { 
+            username: username, 
+            avatar: user.avatar ? user.avatar.toString('base64') : null, 
+            avatarContentType: user.avatarContentType 
+        };
         res.redirect("/chat");
     }catch(err){
         console.log(err);

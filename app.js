@@ -10,6 +10,7 @@ const indexRouter = require("./routes/indexRouter")
 const signupRouter = require("./routes/signupRouter");
 const chatRouter = require("./routes/chatRouter")
 const loginRouter = require("./routes/loginRouter");
+const sessionRouter = require("./routes/sessionRouter");
 
 const db = require("./config/mongoose-connection")
 
@@ -35,5 +36,6 @@ app.use("/", indexRouter);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/chat", chatRouter);
+app.use("/session", sessionRouter);
 
 server.listen(3000);
