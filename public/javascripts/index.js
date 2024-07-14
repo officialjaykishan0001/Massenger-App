@@ -11,7 +11,7 @@ function getCurrentTime() {
 }
 var sessionData = { } ;
 document.addEventListener("DOMContentLoaded",async  function(){
-  let res  = await fetch("https://massenger-app.onrender.com/chat");
+  let res  = await fetch("https://massenger-app.onrender.com/session");
   sessionData = await res.json();
   console.log(sessionData.user)
 })
