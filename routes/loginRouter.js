@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router();
+const uuid = require("uuid");
 const upload = require("../config/multer-config");
 const User = require("../models/userModel");
 
@@ -11,9 +12,9 @@ router.get("/", function(req, res){
 
 router.post("/user", upload.none(), async function(req, res){
     try{
-        const {username, password}= req.body;
+        const {username, email, password}= req.body;
 
-        const user = await User.findOne({name: username, password: password}, {avatar: 1, avatarContentType: 1});
+        const user = await User.findOne({name: username,email: email, password: password}, {avatar: 1, avatarContentType: 1});
         
         if(!user){
             req.flash('error', 'Username or Password is incorrect')
@@ -21,6 +22,7 @@ router.post("/user", upload.none(), async function(req, res){
         }
 
         req.session.user = { 
+            userid: email,
             username: username, 
             avatar: user.avatar ? user.avatar.toString('base64') : null, 
             avatarContentType: user.avatarContentType 

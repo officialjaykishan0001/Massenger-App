@@ -9,16 +9,19 @@ function getCurrentTime() {
 
   return `${hours}:${formattedMinutes} ${meridian}`;
 }
-var sessionData = { } ;
-document.addEventListener("DOMContentLoaded",async  function(){
-  let res  = await fetch("https://massenger-app.onrender.com/session");
+
+const socket = io();
+var sessionData = {};
+
+
+// Getting User details
+document.addEventListener("DOMContentLoaded", async function () {
+  let res = await fetch("https://massenger-app.onrender.com/api/session"); // https://massenger-app.onrender.com/session
   sessionData = await res.json();
-  console.log(sessionData.user)
+  
 })
 
 
-
-const socket = io();
 
 const receivedMessages = document.querySelector(".received")
 const sentMessages = document.querySelector(".sent")
@@ -29,7 +32,7 @@ let chatMessagesCont = document.querySelector(".chat-messages");
 
 button.addEventListener("click", (e) => {
   if (input.value) {
-    socket.emit("chat message", input.value);
+    socket.emit("chat message", input.value, sessionData.user);
     chatMessagesCont.innerHTML += `
             <div class="message sent mb-4 flex items-end justify-end">
               <div class="message-content bg-blue-500 text-white p-3 rounded-lg">
@@ -47,16 +50,18 @@ button.addEventListener("click", (e) => {
 
 
 socket.on("chat message details", (data) => {
-  const { msg, connected } = data;
-  
+  const { msg, connected, user } = data;
+  console.log(user);
   chatMessagesCont.innerHTML += `
   <div class="message received mb-4 flex items-start">
-  <img src="/images/round-gradient-designify (1).png" alt="Avatar" class="rounded-full w-10 h-10">
+  <img src="data:${user.avatarContentType};base64,${user.avatar}" alt="Avatar" class="rounded-full w-10 h-10">
   <div class="message-content ml-3 bg-gray-200 p-3 rounded-lg">
     <p class="text-sm">${msg}</p>
     <span class="text-xs text-gray-500">${getCurrentTime()}</span>
   </div>
 </div>
     `
+    
   chatMessagesCont.scrollTop = chatMessagesCont.scrollHeight;
 })
+
