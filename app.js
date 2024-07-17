@@ -24,7 +24,7 @@ const sessionMiddleware = (session({
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },
-    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/chat-app' })
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_STRING })
 }));
 
 app.use(sessionMiddleware);
