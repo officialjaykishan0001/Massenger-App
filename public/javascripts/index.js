@@ -1,13 +1,11 @@
 const socket = io();
 var sessionData = {};
 
-// Getting User details
-document.addEventListener("DOMContentLoaded", async function () {
   let res = await fetch("https://massenger-app.onrender.com/api/session");
   sessionData = await res.json();
   
   MessagingLogic();
-})
+
 
 
 function getCurrentTime() {
