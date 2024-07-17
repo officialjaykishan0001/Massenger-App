@@ -4,6 +4,9 @@ module.exports = (io) =>{
             const chatMessageDetail = { msg: msg, connected: socket.connected, user: user }
             socket.broadcast.emit("chat message details", chatMessageDetail);
         })
+        socket.on("User Status", (sessionData)=>{
+            socket.emit("User Status", (sessionData));
+        })
     })
     
 }

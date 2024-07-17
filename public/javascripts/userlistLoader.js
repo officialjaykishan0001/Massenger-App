@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  let r = await fetch("https://massenger-app.onrender.com/api/users");
-  let data = await r.json();
-
   const userList = document.querySelector(".userlist");
+
+  let r = await fetch("http://localhost:3000/api/users");
+  let data = await r.json();
 
   data.forEach(user => {
     const avatarBase64= arrayBufferToBase64(user.avatar.data);
@@ -17,6 +17,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         `
   });
 
+  let res = await fetch("http://localhost:3000/api/session");
+  let sessionData = await res.json();
+  const users = Array.from(document.querySelectorAll(".user"));
+
+  socket.emit("User Status", sessionData);
+  socket.on("User Status", (sessionData)=>{
+    StatusUpdate(sessionData, users);
+  })
 
 })
 
@@ -29,4 +37,15 @@ function arrayBufferToBase64(buffer) {
       binary += String.fromCharCode(bytes[i]);
   }
   return btoa(binary);
+}
+
+function StatusUpdate(sessionData, users){
+  users.forEach((user)=>{
+    // console.log( sessionData.user.username)
+    if(user.lastElementChild.firstElementChild.innerHTML == sessionData.user.username){
+      user.lastElementChild.lastElementChild.innerHTML = "Online"
+      user.lastElementChild.lastElementChild.classList.remove("text-gray-500");
+      user.lastElementChild.lastElementChild.classList.add("text-green-500");
+    }
+  })
 }
