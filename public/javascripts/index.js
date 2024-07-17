@@ -61,7 +61,6 @@ function MessagingLogic() {
 
 }
 
-
 async function main(){
 
   let res = await fetch("https://massenger-app.onrender.com/api/session");
