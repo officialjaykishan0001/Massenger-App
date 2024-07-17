@@ -2,8 +2,12 @@ let onlineUsers = {};
 
 module.exports = (io) =>{
     io.on("connection", (socket)=>{
+        socket.on("chat message", (msg , user)=>{
+            const chatMessageDetail = { msg: msg, connected: socket.connected, user: user }
+            socket.broadcast.emit("chat message details", chatMessageDetail);
+        })
+       
         const session = socket.request.session;
-
         if(session && session.user){
             const username = session.user.username;
             const avatar = session.user.avatar;
@@ -19,13 +23,7 @@ module.exports = (io) =>{
                 io.emit("User_Status", {username, status: 'Offline'});
             }
         })
-        socket.on("chat message", (msg , user)=>{
-            const chatMessageDetail = { msg: msg, connected: socket.connected, user: user }
-            socket.broadcast.emit("chat message details", chatMessageDetail);
-        })
-        socket.on("User Status", (sessionData)=>{
-            socket.emit("User Status", (sessionData));
-        })
+       
     })
     
 }
