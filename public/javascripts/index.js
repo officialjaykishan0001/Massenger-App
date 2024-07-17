@@ -1,11 +1,6 @@
 const socket = io();
 var sessionData = {};
 
-  let res = await fetch("https://massenger-app.onrender.com/api/session");
-  sessionData = await res.json();
-  
-  MessagingLogic();
-
 
 
 function getCurrentTime() {
@@ -67,3 +62,13 @@ function MessagingLogic() {
 }
 
 
+async function main(){
+
+  let res = await fetch("https://massenger-app.onrender.com/api/session");
+  sessionData = await res.json();
+  
+  MessagingLogic();
+  
+}
+
+main();
