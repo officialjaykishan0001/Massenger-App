@@ -4,7 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const session = require("express-session");
 const  flash = require("connect-flash");
-// const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo");
 require('dotenv').config()
 
 const indexRouter = require("./routes/indexRouter")
@@ -23,8 +23,8 @@ const sessionMiddleware = (session({
     secret: 'ABCD',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false },
-    // store: MongoStore.create({ mongoUrl: process.env.MONGODB_STRING })
+    cookie: { secure: true },
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_STRING })
 }));
 
 app.use(sessionMiddleware);
