@@ -45,7 +45,6 @@ function MessagingLogic() {
 
   socket.on("chat message details", (data) => {
     const { msg, connected, user } = data;
-    console.log(user);
     chatMessagesCont.innerHTML += `
   <div class="message received mb-4 flex items-start">
   <img src="data:${user.avatarContentType};base64,${user.avatar}" alt="Avatar" class="rounded-full w-10 h-10">
@@ -63,7 +62,7 @@ function MessagingLogic() {
 
 async function main(){
 
-  let res = await fetch("https://massenger-app.onrender.com/api/session");
+  let res = await fetch("/api/session");
   sessionData = await res.json();
   
   MessagingLogic();
