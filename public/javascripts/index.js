@@ -3,8 +3,7 @@ var sessionData = {};
 
 // Getting User details
 document.addEventListener("DOMContentLoaded", async function () {
-  // let res = await fetch("https://massenger-app.onrender.com/api/session"); // https://massenger-app.onrender.com/session
-  let res = await fetch("http://localhost:3000/api/session"); // https://massenger-app.onrender.com/session
+  let res = await fetch("https://massenger-app.onrender.com/api/session");
   sessionData = await res.json();
   
   MessagingLogic();

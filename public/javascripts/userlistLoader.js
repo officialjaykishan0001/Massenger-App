@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   socket.on("User Status", (sessionData)=>{
     StatusUpdate(sessionData, users);
   })
-
 })
 
 
