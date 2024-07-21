@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 
 
-mongoose.connect("mongodb://localhost:27017/QuickChat")
+mongoose.connect("mongodb+srv://jaykishankharwar215:wJxwjVEltKllEN8L@quickchat.85gmgnb.mongodb.net/quick_chat")
 .then(function(){
     console.log("connected");
 })
