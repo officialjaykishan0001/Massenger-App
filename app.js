@@ -18,14 +18,13 @@ const db = require("./config/mongoose-connection")
 const server = http.createServer(app);
 const io = new Server(server);
 
-
 const sessionMiddleware = (session({
     secret: 'ABCD',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: true },
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_STRING })
-}));
+    cookie: { secure: false },
+    // store: MongoStore.create({ mongoUrl: process.env.LOCAL_MONGODB_STRING })
+})); 
 
 app.use(sessionMiddleware);
 app.use(flash());
